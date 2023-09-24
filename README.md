@@ -62,3 +62,8 @@ mvn -version
 
 You should see Maven version information.
 
+
+## Build
+```bash
+$ mvn clean install
+```
