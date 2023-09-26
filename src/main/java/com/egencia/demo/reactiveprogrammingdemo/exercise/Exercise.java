@@ -2,15 +2,29 @@ package com.egencia.demo.reactiveprogrammingdemo.exercise;
 
 import java.io.IOException;
 import java.time.Duration;
+import java.util.List;
 
 public class Exercise {
 
     public static void main(String[] args) throws IOException {
 
 
+        System.out.println(Thread.currentThread().getId());
+        List<String> list = List.of("test1", "test2", "test3");
+        list.forEach( item -> {
+            System.out.println(Thread.currentThread().getId());
+            System.out.println(item);
+        });
+
+
         // Q1: Print all numbers and users in the ReactiveSources.intNumbersFlux stream
 
-//        ReactiveSources.intNumbersFlux().log().subscribe(System.out::println);
+        ReactiveSources.intNumbersFlux().log().subscribe(
+                item -> {
+                    System.out.println(Thread.currentThread().getId());
+                    System.out.println(item);
+                }
+        );
 //        ReactiveSources.userFlux().subscribe(System.out::println);
 
 

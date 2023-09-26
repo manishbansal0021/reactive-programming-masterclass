@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.ArrayList;
@@ -18,17 +19,16 @@ public class UserService {
     UserRepository userRepository;
 
 
-    public Mono<String> addUsers() {
+    public Flux<User> addUsers() {
 
         List<User> userList = new ArrayList<>();
 
-        for(int i=2;i<500;i++){
+        for(int i=1;i<500;i++){
             userList.add(new User(i+"","test_user"+i,"admin","test"));
         }
 
-        userRepository.saveAll(userList).subscribe();
+        return userRepository.saveAll(userList);
 
-        return Mono.just("Added users");
 
     }
 
@@ -58,6 +58,17 @@ public class UserService {
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
                  .bodyToMono(User.class);
+
+    }
+
+    public Flux<String > getFluxThroughAPI() {
+
+        WebClient webClient = WebClient.create("http://localhost:8080/counting");
+
+         return webClient.get()
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                 .bodyToFlux(String.class);
 
     }
 
