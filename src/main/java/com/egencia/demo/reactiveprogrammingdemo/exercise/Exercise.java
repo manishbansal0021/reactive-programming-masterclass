@@ -1,5 +1,7 @@
 package com.egencia.demo.reactiveprogrammingdemo.exercise;
 
+import reactor.core.publisher.SignalType;
+
 import java.io.IOException;
 import java.time.Duration;
 import java.util.List;
