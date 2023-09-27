@@ -30,24 +30,10 @@ public class UserController {
 
     }
 
-    @GetMapping("/counting")
-    public Flux<String > getCounting(){
-
-        return Flux.just("one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten")
-                .delayElements(Duration.ofSeconds(1));
-
-    }
-
     @GetMapping("/user/api/{userId}")
     public Mono<User> getUserThroughAPI(@PathVariable String userId){
 
         return userService.getUserThroughAPI(userId);
-    }
-
-    @GetMapping("/users/api")
-    public Flux<String> getFluxThroughAPI(){
-
-        return userService.getFluxThroughAPI();
     }
 
     @GetMapping("/del/user/{userId}")

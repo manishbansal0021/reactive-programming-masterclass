@@ -61,16 +61,6 @@ public class UserService {
 
     }
 
-    public Flux<String > getFluxThroughAPI() {
-
-        WebClient webClient = WebClient.create("http://localhost:8080/counting");
-
-         return webClient.get()
-                .accept(MediaType.APPLICATION_JSON)
-                .retrieve()
-                 .bodyToFlux(String.class);
-
-    }
 
     public User getUSer(String userId) {
         return new User();
